@@ -21,6 +21,7 @@ dependencies {
   implementation(libs.spring.cloud.discovery.client)
   implementation(libs.spring.boot.starter.web)
   implementation(libs.spring.boot.starter.security)
+  implementation(libs.spring.boot.starter.oauth2.client)
   implementation(libs.spring.boot.starter.oauth2.authorization.server)
   implementation(libs.springdoc.openapi.webmvc.api)
   testImplementation(libs.spring.boot.starter.test)
