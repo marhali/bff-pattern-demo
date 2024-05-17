@@ -16,14 +16,8 @@ repositories {
 }
 
 dependencies {
-  implementation(project(":be-shared"))
-  implementation(libs.spring.boot.starter.actuator)
-  implementation(libs.spring.cloud.config.client)
-  implementation(libs.spring.cloud.discovery.client)
   implementation(libs.spring.boot.starter.web)
   implementation(libs.spring.boot.starter.security)
-  implementation(libs.spring.boot.starter.oauth2.resource.server)
-  implementation(libs.springdoc.openapi.webmvc.api)
   testImplementation(libs.spring.boot.starter.test)
   testRuntimeOnly(libs.junit.platform.launcher)
 }

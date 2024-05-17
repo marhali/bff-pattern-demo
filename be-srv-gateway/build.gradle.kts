@@ -2,6 +2,7 @@ plugins {
   java
   alias(libs.plugins.spring.boot)
   alias(libs.plugins.spring.dependency.management)
+  alias(libs.plugins.lombok)
 }
 
 group = providers.gradleProperty("projectGroup").get()
@@ -20,6 +21,7 @@ dependencies {
   implementation(libs.spring.cloud.config.client)
   implementation(libs.spring.cloud.discovery.client)
   implementation(libs.spring.cloud.gateway)
+  implementation(libs.spring.boot.starter.oauth2.client)
   implementation(libs.springdoc.openapi.webflux.api)
   implementation(libs.springdoc.openapi.webflux.ui)
   testImplementation(libs.spring.boot.starter.test)

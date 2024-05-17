@@ -1,4 +1,5 @@
 rootProject.name = "bff-pattern-demo"
+include("be-shared")
 include("be-srv-config")
 include("be-srv-discovery")
 include("be-srv-auth")

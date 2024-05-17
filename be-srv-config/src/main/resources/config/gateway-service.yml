@@ -1,5 +1,6 @@
 server:
   port: 8080
+  forward-headers-strategy: framework
 eureka:
   client:
     serviceUrl:
@@ -11,9 +12,34 @@ spring:
         locator:
           enabled: true
       routes:
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/**
+          filters:
+            - RewritePath=/auth/?(?<segment>.*), /$\{segment}
+            - TokenRelay=
+            - RemoveRequestHeader=Cookie
         - id: todo-service
           uri: lb://todo-service
           predicates:
             - Path=/todo/**
           filters:
             - RewritePath=/todo/?(?<segment>.*), /$\{segment}
+            - TokenRelay=
+            - RemoveRequestHeader=Cookie
+  security:
+    oauth2:
+      client:
+        registration:
+          gateway:
+            provider: spring
+            client-id: gateway-client
+            client-secret: "gateway-secret"
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://localhost:8080/login/oauth2/code/{registrationId}"
+            scope: openid, profile
+            client-name: gateway
+        provider:
+          spring:
+            issuer-uri: http://localhost:8089

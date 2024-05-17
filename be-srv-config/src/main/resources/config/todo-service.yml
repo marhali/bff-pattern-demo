@@ -1,6 +1,13 @@
 server:
   port: 0
+  forward-headers-strategy: framework
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8089
