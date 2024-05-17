@@ -4,8 +4,8 @@ plugins {
   alias(libs.plugins.spring.dependency.management)
 }
 
-group = "de.marhali.bff"
-version = "0.0.1-SNAPSHOT"
+group = providers.gradleProperty("projectGroup").get()
+version = providers.gradleProperty("projectVersion").get()
 
 java {
   sourceCompatibility = JavaVersion.toVersion(libs.versions.java.get())
