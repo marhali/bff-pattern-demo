@@ -18,6 +18,8 @@ repositories {
 dependencies {
   implementation(libs.spring.boot.starter.actuator)
   implementation(libs.spring.cloud.config.client)
+  implementation(libs.micrometer.tracing.bridge.otel)
+  implementation(libs.opentelemetry.exporter.zipkin)
   implementation(libs.spring.cloud.discovery.server)
   testImplementation(libs.spring.boot.starter.test)
   testRuntimeOnly(libs.junit.platform.launcher)

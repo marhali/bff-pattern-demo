@@ -24,6 +24,8 @@ spring-cloud-gateway = { group = "org.springframework.cloud", name = "spring-clo
 springdoc-openapi-webmvc-api = { group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-api", version.ref = "springdoc-openapi" }
 springdoc-openapi-webflux-api = { group = "org.springdoc", name = "springdoc-openapi-starter-webflux-api", version.ref = "springdoc-openapi" }
 springdoc-openapi-webflux-ui = { group = "org.springdoc", name = "springdoc-openapi-starter-webflux-ui", version.ref = "springdoc-openapi" }
+micrometer-tracing-bridge-otel = { group = "io.micrometer", name = "micrometer-tracing-bridge-otel" }
+opentelemetry-exporter-zipkin = { group = "io.opentelemetry", name = "opentelemetry-exporter-zipkin" }
 junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher" }
 
 [plugins]

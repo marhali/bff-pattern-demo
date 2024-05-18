@@ -20,6 +20,8 @@ dependencies {
   implementation(libs.spring.boot.starter.actuator)
   implementation(libs.spring.cloud.config.client)
   implementation(libs.spring.cloud.discovery.client)
+  implementation(libs.micrometer.tracing.bridge.otel)
+  implementation(libs.opentelemetry.exporter.zipkin)
   implementation(libs.spring.cloud.gateway)
   implementation(libs.spring.boot.starter.oauth2.client)
   implementation(libs.springdoc.openapi.webflux.api)
