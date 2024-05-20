@@ -1,4 +1,4 @@
-name: bff-pattern-dem-infrastructure
+name: bff-pattern-demo-infrastructure
 services:
   zipkin:
     image: openzipkin/zipkin-slim:3.3
