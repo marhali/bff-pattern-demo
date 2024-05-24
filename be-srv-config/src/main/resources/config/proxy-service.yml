@@ -1,0 +1,38 @@
+server:
+  port: 80
+  forward-headers-strategy: framework
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: fe-app-spa
+          uri: http://localhost:5173
+          predicates:
+            - Path=/**
+        - id: gateway-service
+          uri: lb://gateway-service
+          predicates:
+            - Path=/api/**
+          filters:
+            - RewritePath=/api/?(?<segment>.*), /$\{segment}
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/**
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
