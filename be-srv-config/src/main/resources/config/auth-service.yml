@@ -1,6 +1,8 @@
 server:
   port: 8089
   forward-headers-strategy: framework
+  servlet:
+    context-path: /auth
 logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"

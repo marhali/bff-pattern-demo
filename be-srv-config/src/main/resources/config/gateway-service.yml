@@ -45,7 +45,7 @@ spring:
             client-name: gateway
         provider:
           spring:
-            issuer-uri: http://localhost:8089
+            issuer-uri: http://localhost:80/auth
 management:
   tracing:
     sampling:
