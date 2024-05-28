@@ -39,9 +39,9 @@ spring:
                 - "authorization_code"
                 - "refresh_token"
               redirect-uris:
-                - "http://localhost:8080/login/oauth2/code/gateway"
+                - "http://localhost:8080/api/login/oauth2/code/gateway"
               post-logout-redirect-uris:
-                - "http://localhost:8080/"
+                - "http://localhost:8080/api"
               scopes:
                 - "openid"
                 - "profile"

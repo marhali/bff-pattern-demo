@@ -9,25 +9,20 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
 spring:
+  webflux:
+    base-path: /api
   cloud:
     gateway:
       discovery:
         locator:
           enabled: true
       routes:
-        - id: auth-service
-          uri: lb://auth-service
-          predicates:
-            - Path=/auth/**
-          filters:
-            - RewritePath=/auth/?(?<segment>.*), /$\{segment}
-            - TokenRelay=
-            - RemoveRequestHeader=Cookie
         - id: todo-service
           uri: lb://todo-service
           predicates:
-            - Path=/todo/**
+            - Path=/api/todo/**
           filters:
+            - StripBasePath=1
             - RewritePath=/todo/?(?<segment>.*), /$\{segment}
             - TokenRelay=
             - RemoveRequestHeader=Cookie
@@ -40,7 +35,7 @@ spring:
             client-id: gateway-client
             client-secret: "gateway-secret"
             authorization-grant-type: authorization_code
-            redirect-uri: "http://localhost:8080/login/oauth2/code/{registrationId}"
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
             scope: openid, profile
             client-name: gateway
         provider:
