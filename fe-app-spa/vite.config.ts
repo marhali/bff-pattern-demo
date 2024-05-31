@@ -5,14 +5,16 @@ import react from '@vitejs/plugin-react-swc';
 export default defineConfig({
   plugins: [react()],
   server: {
+    // Run on IPv4 to fix proxy forward headers (forward-for: misses brackets?)
+    host: '0.0.0.0',
     proxy: {
       '/auth': {
         target: 'http://localhost:8089',
-        changeOrigin: true,
+        xfwd: true,
       },
       '/api': {
         target: 'http://localhost:8080',
-        changeOrigin: true,
+        xfwd: true,
       },
     },
   },
