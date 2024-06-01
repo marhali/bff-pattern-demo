@@ -1,6 +1,9 @@
 import {NavLink} from "react-router-dom";
+import useAuthenticationContext from "@/core/auth/presentation/hooks/use-authentication-context.ts";
 
 function AppHeader() {
+  const { username} = useAuthenticationContext()
+
   return (
     <header>
       <nav className="bg-blue-900 text-white px-4 lg:px-6 py-2.5">
@@ -12,7 +15,8 @@ function AppHeader() {
             <NavLink to="/todo" className={({isActive}) => isActive ? 'underline' : ''}>ToDo's</NavLink>
           </div>
           <div className="flex items-center space-x-2">
-            profile
+            <span>[{username}]</span>
+            <a href="/api/logout">Logout</a>
           </div>
         </div>
       </nav>
