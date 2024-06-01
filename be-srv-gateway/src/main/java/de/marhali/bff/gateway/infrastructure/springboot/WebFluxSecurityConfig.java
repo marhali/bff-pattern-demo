@@ -16,9 +16,12 @@ import reactor.core.publisher.Mono;
 public class WebFluxSecurityConfig {
 	@Bean
 	public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+		var cookieTokenRepository = CookieServerCsrfTokenRepository.withHttpOnlyFalse();
+		cookieTokenRepository.setCookiePath("/");
+
 		return http
 			.csrf(csrf -> csrf
-				.csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse())
+				.csrfTokenRepository(cookieTokenRepository)
 				.csrfTokenRequestHandler(new ServerCsrfTokenHeaderRequestHandler()))
 			.authorizeExchange(authorize -> authorize.anyExchange().authenticated())
 			.oauth2Login(Customizer.withDefaults())
@@ -26,7 +29,7 @@ public class WebFluxSecurityConfig {
 	}
 
 	@Bean
-	WebFilter csrfCookieWebFilter() {
+	public WebFilter csrfCookieWebFilter() {
 		return (exchange, chain) -> {
 			exchange.getAttributeOrDefault(CsrfToken.class.getName(), Mono.empty()).subscribe();
 			return chain.filter(exchange);
