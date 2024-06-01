@@ -40,7 +40,8 @@ public class TodoServiceImplMemory implements TodoService {
 	public void updateTodo(String userId, Todo todo) {
 		var targetTodo = this.getTodoById(userId, todo.getId());
 		if(targetTodo.isPresent()) {
-			todo.setCompleted(todo.isCompleted());
+			targetTodo.get().setTitle(todo.getTitle());
+			targetTodo.get().setCompleted(todo.isCompleted());
 		} else {
 			this.addTodo(userId, todo);
 		}
