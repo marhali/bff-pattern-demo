@@ -1,5 +1,6 @@
 import {PropsWithChildren, ReactNode, useSyncExternalStore} from "react"
 import authServiceImpl from "@/core/auth/service/auth-service-impl.ts"
+import AuthenticationContext from "@/core/auth/presentation/context/authentication-context.ts";
 
 type AuthenticationProviderProps = PropsWithChildren & {
   fallback: ReactNode
@@ -13,7 +14,16 @@ function AuthenticationProvider(props: AuthenticationProviderProps) {
   }
 
   const state = useSyncExternalStore(authServiceImpl.subscribe, authServiceImpl.getAuthState)
-  return state.authenticated ? children : fallback
+
+  if(state.authentication) {
+    return (
+      <AuthenticationContext.Provider value={state.authentication}>
+        {children}
+      </AuthenticationContext.Provider>
+    )
+  }
+
+  return fallback
 }
 
 export default AuthenticationProvider
