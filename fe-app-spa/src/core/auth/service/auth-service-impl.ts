@@ -12,14 +12,18 @@ const state: AuthState = {
 const authServiceImpl: AuthService = {
   isInitialized: () => state.initialized,
   initialize: async () => {
-    const res = await fetch(ApiRoutes.PING())
-    state.initialized = true
-    state.authenticated = res.status === 200
-    pubsub.publish(state)
+    try {
+      const res = await fetch(ApiRoutes.PING(), /*{ redirect: "error" } */)
+      state.authenticated = res.status === 200
+    } catch {
+      state.authenticated = false
+    } finally {
+      state.initialized = true
+      pubsub.publish(state)
+    }
   },
   getAuthState: () => state,
   subscribe: pubsub.subscribe
 }
-
 
 export default authServiceImpl

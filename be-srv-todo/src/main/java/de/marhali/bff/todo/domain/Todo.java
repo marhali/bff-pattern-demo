@@ -1,12 +1,14 @@
 package de.marhali.bff.todo.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
 @Data
+@NoArgsConstructor
 public class Todo {
-	private final UUID id;
-	private final String title;
+	private UUID id;
+	private String title;
 	private boolean completed;
 }
