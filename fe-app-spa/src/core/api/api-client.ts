@@ -3,8 +3,10 @@ const defaultHeaders = {
   'Content-Type': 'application/json',
 }
 
-const csrfHeaders = {
-  'X-Xsrf-Token': document.cookie.match(new RegExp('(^| )XSRF-TOKEN=([^;]+)'))?.[2] ?? ''
+function csrfHeaders() {
+  return {
+    'X-Xsrf-Token': document.cookie.match(new RegExp('(^| )XSRF-TOKEN=([^;]+)'))?.[2] ?? ''
+  }
 }
 
 const apiClient = {
@@ -18,7 +20,7 @@ const apiClient = {
   post: (url: string, body?: unknown): Promise<Response> => {
     return fetch(url, {
       method: 'POST',
-      headers: { ...defaultHeaders, ...csrfHeaders },
+      headers: { ...defaultHeaders, ...csrfHeaders() },
       body: body ? JSON.stringify(body) : undefined,
       redirect: 'error'
     })
@@ -26,7 +28,7 @@ const apiClient = {
   put: (url: string, body?: unknown): Promise<Response> => {
     return fetch(url, {
       method: 'PUT',
-      headers: { ...defaultHeaders, ...csrfHeaders },
+      headers: { ...defaultHeaders, ...csrfHeaders() },
       body: body ? JSON.stringify(body) : undefined,
       redirect: 'error'
     })
@@ -34,7 +36,7 @@ const apiClient = {
   delete: (url: string, body?: unknown): Promise<Response> => {
     return fetch(url, {
       method: 'DELETE',
-      headers: { ...defaultHeaders, ...csrfHeaders },
+      headers: { ...defaultHeaders, ...csrfHeaders() },
       body: body ? JSON.stringify(body) : undefined,
       redirect: 'error'
     })
