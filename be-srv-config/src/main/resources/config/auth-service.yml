@@ -42,8 +42,8 @@ spring:
                 - "http://localhost:8080/api/login/oauth2/code/gateway"
                 - "http://localhost:5173/api/login/oauth2/code/gateway"
               post-logout-redirect-uris:
-                - "http://localhost:8080/api"
-                - "http://localhost:5173"
+                - "http://localhost:8080/api/.."
+                - "http://localhost:5173/api/.."
               scopes:
                 - "openid"
                 - "profile"

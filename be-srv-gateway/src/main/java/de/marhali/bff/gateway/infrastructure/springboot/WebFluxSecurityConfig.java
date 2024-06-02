@@ -1,6 +1,7 @@
 package de.marhali.bff.gateway.infrastructure.springboot;
 
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
@@ -13,6 +14,7 @@ import org.springframework.security.web.server.authentication.logout.ServerLogou
 import org.springframework.security.web.server.csrf.CookieServerCsrfTokenRepository;
 import org.springframework.security.web.server.csrf.CsrfToken;
 import org.springframework.web.server.WebFilter;
+
 import reactor.core.publisher.Mono;
 
 @Configuration
@@ -48,7 +50,7 @@ public class WebFluxSecurityConfig {
 	private ServerLogoutSuccessHandler oidcLogoutSuccessHandler() {
 		OidcClientInitiatedServerLogoutSuccessHandler oidcClientInitiatedServerLogoutSuccessHandler = new OidcClientInitiatedServerLogoutSuccessHandler(this.clientRegistrationRepository);
 
-		oidcClientInitiatedServerLogoutSuccessHandler.setPostLogoutRedirectUri("http://localhost:5173");
+		oidcClientInitiatedServerLogoutSuccessHandler.setPostLogoutRedirectUri("{baseUrl}/..");
 
 		return oidcClientInitiatedServerLogoutSuccessHandler;
 	}
