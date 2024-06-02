@@ -25,7 +25,7 @@ function Component() {
   const [completed, setCompleted] = useState(todo.completed)
 
   const onSave = useCallback(() => {
-    ApiClient.post(ApiRoutes.TODO(), { ...todo, title, completed }).then(() => navigate('..'))
+    ApiClient.put(ApiRoutes.TODO(), { ...todo, title, completed }).then(() => navigate('..'))
   }, [todo.id, title, completed])
 
   const onDelete = useCallback(() => {
